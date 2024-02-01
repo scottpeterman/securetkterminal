@@ -1,5 +1,5 @@
 
-# Serial Terminal Emulation
+# SSH + Serial Terminal Emulation
 
 A comprehensive mult-tabbed terminal emulation application built with Python and Tkinter, supporting serial communication and SSH connectivity with advanced features like window resizing, font adjustment, and terminal history management.
 
