@@ -6,6 +6,8 @@ from tkinter import ttk, Menu
 from securetkterminal.TerminalSSH import Terminal
 from pprint import pprint as pp
 
+
+
 class App(ttk.Frame):
     def __init__(self, parent, ssh_config, ui_config, log_file):
         super().__init__(parent)
@@ -33,6 +35,9 @@ class App(ttk.Frame):
         sessions_menu.add_command(label="Quick Connect",
                                   command=lambda: self.quick_connect())  # Implement quick_connect function
         self.menubar.add_cascade(label="Sessions", menu=sessions_menu)
+        help_menu = Menu(self.menubar, tearoff=0)
+        help_menu.add_command(label="About", command=self.show_about)  # Implement show_about function
+        self.menubar.add_cascade(label="Help", menu=help_menu)
 
         # Create the Help menu
         # help_menu = Menu(self.menubar, tearoff=0)
@@ -65,7 +70,33 @@ class App(ttk.Frame):
         pass  # Implement session listing logic
 
     def show_about(self):
-        pass  # Implement about dialog logic
+        about_window = tk.Toplevel(self.parent)
+        about_window.title("About")
+
+        # Add your application information
+        info_text = tk.Label(about_window, text="SecureTkTerminal\n\nA comprehensive terminal emulation application built with Python, Tkinter and sv-ttk", justify=tk.LEFT)
+        info_text.pack(pady=(10, 0), padx=10)
+
+        # Add GitHub link
+        link_text = tk.Label(about_window, text="GitHub Repository", fg="green", cursor="hand2")
+        link_text.pack(pady=(0, 10), padx=10)
+        link_text.bind("<Button-1>", lambda e: webbrowser.open_new("https://github.com/scottpeterman/securetkterminal"))
+
+        # Add a close button
+        close_button = tk.Button(about_window, text="Close", command=about_window.destroy)
+        close_button.pack(pady=(0, 10))
+        # Wait for the window to update to get its width and height
+        about_window.update_idletasks()
+
+        # Calculate position x, y
+        ws = self.parent.winfo_screenwidth()  # Width of the screen
+        hs = self.parent.winfo_screenheight()  # Height of the screen
+        w = about_window.winfo_width()  # Width of the toplevel window
+        h = about_window.winfo_height()  # Height of the toplevel window
+        x = (ws / 2) - (w / 2)
+        y = (hs / 2) - (h / 2)
+
+        about_window.geometry('+%d+%d' % (x, y))
 
     def quick_connect(self):
         dialog = QuickConnectDialog(self.parent, title="Quick Connect")
@@ -159,6 +190,29 @@ class App(ttk.Frame):
             self.tab_control.forget(tab_id)  # This should remove the tab
             session.destroy()  # Call the destroy method of the Terminal instance
             print(f"Closed tab and session for {tab_id}")
+
+
+import tkinter as tk
+import webbrowser
+
+
+def show_about(self):
+    about_window = tk.Toplevel(self.parent)
+    about_window.title("About")
+
+    # Add your application information
+    info_text = tk.Label(about_window, text="SecureTkTerminal\nA comprehensive mult-tabbed terminal emulation application built with Python and Tkinter", justify=tk.LEFT)
+    info_text.pack(pady=(10, 0), padx=10)
+
+    # Add GitHub link
+    link_text = tk.Label(about_window, text="GitHub Repository", fg="blue", cursor="hand2")
+    link_text.pack(pady=(0, 10), padx=10)
+    link_text.bind("<Button-1>", lambda e: webbrowser.open_new("https://github.com/scottpeterman/securetkterminal"))
+
+    # Add a close button
+    close_button = tk.Button(about_window, text="Close", command=about_window.destroy)
+    close_button.pack(pady=(0, 10))
+
 
 class QuickConnectDialog(tkinter.Toplevel):
     def __init__(self, parent, title):

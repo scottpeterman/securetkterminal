@@ -2,27 +2,27 @@ from setuptools import setup, find_packages
 
 setup(
     name='securetkterminal',
-    version='0.1.9',
-    author='Your Name',
-    author_email='your.email@example.com',
-    description='A description of your project',
+    version='0.2.0',
+    author='Scott Peterman',
+    author_email='scottpeterman@gmail.com',
+    description='''A comprehensive terminal emulation application built with Python, Tkinter and sv-ttk, supporting serial communication and SSH connectivity with advanced features like window resizing, font adjustment, and terminal history management.''',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    url='https://github.com/yourusername/securetkterminal',
+    url='https://github.com/scottpeterman/securetkterminal',
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        'bcrypt==4.1.2',
-        'cffi==1.16.0',
-        'cryptography==42.0.2',
-        'paramiko==3.4.0',
-        'pillow==10.2.0',
-        'pycparser==2.21',
-        'PyNaCl==1.5.0',
-        'pyserial==3.5',
-        'pyte==0.8.2',
-        'sv-ttk==2.6.0',
-        'wcwidth==0.2.13'
+        'bcrypt>=4.1.2',
+        'cffi>=1.16.0',
+        'cryptography>=42.0.2',
+        'paramiko>=3.4.0',
+        'pillow>=10.2.0',
+        'pycparser>=2.21',
+        'PyNaCl>=1.5.0',
+        'pyserial>=3.5',
+        'pyte>=0.8.2',
+        'sv-ttk>=2.6.0',
+        'wcwidth>=0.2.13'
     ],
     entry_points={
         'console_scripts': [

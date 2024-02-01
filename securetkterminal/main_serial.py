@@ -1,4 +1,5 @@
 import tkinter as tk
+import webbrowser
 from tkinter import ttk, font
 from securetkterminal.TerminalSerial import  TerminalSerial
 from securetkterminal.SerialConnectionDialog import SerialConnectionDialog
@@ -20,6 +21,11 @@ class MainApplication(tk.Tk):
         screen_height = self.winfo_screenheight()
         center_x = int(screen_width / 2 - window_width / 2)
         center_y = int(screen_height / 2 - window_height / 2)
+        self.menubar = tk.Menu(self)
+        self.config(menu=self.menubar)
+        help_menu = tk.Menu(self.menubar, tearoff=0)
+        help_menu.add_command(label="About", command=self.show_about)  # Implement show_about function
+        self.menubar.add_cascade(label="Help", menu=help_menu)
 
         # Set the geometry and center the window
         self.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
@@ -100,6 +106,36 @@ class MainApplication(tk.Tk):
         self.terminal_frame.custom_font = font.Font(family='Lucida Console', size=12)
         self.terminal_frame.pack(expand=True, fill='both')
         self.terminal_frame.connect()
+
+    def show_about(self):
+        about_window = tk.Toplevel(self)
+        about_window.title("About")
+
+        # Add your application information
+        info_text = tk.Label(about_window, text="SecureTkTerminal\n\nA comprehensive terminal emulation application built with Python, Tkinter and sv-ttk", justify=tk.LEFT)
+        info_text.pack(pady=(10, 0), padx=10)
+
+        # Add GitHub link
+        link_text = tk.Label(about_window, text="GitHub Repository", fg="green", cursor="hand2")
+        link_text.pack(pady=(0, 10), padx=10)
+        link_text.bind("<Button-1>", lambda e: webbrowser.open_new("https://github.com/scottpeterman/securetkterminal"))
+
+        # Add a close button
+        close_button = tk.Button(about_window, text="Close", command=about_window.destroy)
+        close_button.pack(pady=(0, 10))
+        # Wait for the window to update to get its width and height
+        about_window.update_idletasks()
+
+        # Calculate position x, y
+        ws = self.winfo_screenwidth()  # Width of the screen
+        hs = self.winfo_screenheight()  # Height of the screen
+        w = about_window.winfo_width()  # Width of the toplevel window
+        h = about_window.winfo_height()  # Height of the toplevel window
+        x = (ws / 2) - (w / 2)
+        y = (hs / 2) - (h / 2)
+
+        about_window.geometry('+%d+%d' % (x, y))
+
 
 def run():
     app = MainApplication()

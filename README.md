@@ -192,5 +192,6 @@ The process of mapping the `pyte` screen to the text widget involves two main st
 - Mapping `pyte`'s screen to a text widget involves carefully translating the grid structure into a linear format suitable for the text widget, handling special cases like cursor positioning and control sequences, and managing additional features like a scrollback buffer. With this approach, complex terminal interactions can be accurately represented within a GUI application.
 
 ### Build
-`pip install wheel setuptools `
-`python setup.py sdist bdist_wheel`
+`pip install wheel setuptools `<br>
+`python setup.py sdist bdist_wheel`<br>
+`twine upload dist/*`
