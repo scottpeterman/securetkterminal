@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+bcrypt = "==4.1.2"
+cffi = "==1.16.0"
+cryptography = "==42.0.2"
+paramiko = "==3.4.0"
+pillow = "==10.2.0"
+pycparser = "==2.21"
+pynacl = "==1.5.0"
+pyserial = "==3.5"
+pyte = "==0.8.2"
+sv-ttk = "==2.6.0"
+wcwidth = "==0.2.13"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
